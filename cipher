@@ -1,7 +1,6 @@
 /* Name :Nihal Punjani
 *  Date: 10.9.20
-*  Program Description: Program is a Substitution Ciper with Caesar cipher and a Random  
-*  Cipher as its subclasses.
+*  Program Description: Program is a Substitution Ciper with Caesar cipher and a Random Cipher as its subclasses.
 */
 
 //Directives for input/output, string, and vectors
@@ -54,7 +53,7 @@ class SubstitutionCipher{
 	}
 	
 	//method to decrypt encrypted message
-	string decrypt(string secret){  //1
+	string decrypt(string secret){
        //calls the method decode with the parmeters secret and decoder
 	    return decode(secret, decoder);
 	}
@@ -68,26 +67,26 @@ class SubstitutionCipher{
         //using copy method to store the letters into the char array temp, must declare size of array also
         original.copy(temp, size);
         //string to store the message
-        string cWord = "";    //1
+        string cWord = "";
         //for-loop that iterates through array
         for(int k = 0; k < sizeof(temp); k++){
             //if condition to check if letter is uppercase
-            if(isupper(temp[k])){   //n
+            if(isupper(temp[k])){ 
                 //storing the asii value of the char minus 'A' which is 65
-                int j = temp[k] - 'A';    //n
+                int j = temp[k] - 'A'; 
                 //stores the int value in vector used to decrypt later
-                key.push_back(j);   //n
+                key.push_back(j); 
                 //storing char from encoder array into temp array
-                temp[k] = code[j];    //n
+                temp[k] = code[j];
                 //adding the char to the string
-                cWord = cWord + temp[k];    //n
+                cWord = cWord + temp[k];
             }
             //when input is not an uppercase letter 
-            else {    //1
+            else { 
                 //stores the value as a 0 into the vector
-                key.push_back(0);   //1
+                key.push_back(0);
                 //adds the char to the string
-                cWord = cWord + temp[k];  //n
+                cWord = cWord + temp[k];
             }
         }
         //returns the string
@@ -177,35 +176,33 @@ class CaesarCipher: public SubstitutionCipher {
     public:
 
     //empty constructor
-    CaesarCipher(){ //1
+    CaesarCipher(){
 
     }
     
-    //O(1) ; Runtime 133 executable units
     //constructor which takes an int parameter
-    CaesarCipher(int rotation){ //2
+    CaesarCipher(int rotation){
         //for-loop to set value of char at each iteration  
-        for (int k=0; k<26; k++) {  //79
+        for (int k=0; k<26; k++) {
     //assigns the char to the k place of encoder
     //rotation shifts alphabet n places
-		this->encoder[k] = (char) ('A' + (k + rotation) % 26); //26
+		this->encoder[k] = (char) ('A' + (k + rotation) % 26);
     //assigns the char to the k place of decoder
     //equation reshifts the alphabet in opposite direction to map encoder
-		this->decoder[k] = (char) ('A' + (k - rotation +26) % 26); //26
+		this->decoder[k] = (char) ('A' + (k - rotation +26) % 26);
 		}
     }
     
-    //O(n) ; Run time = 4n + 55
     //method to set rotation of cipher
-    void setRotation(int rotation){ //2
+    void setRotation(int rotation){
         //for-loop to set value of char at each iteration 
-        for (int k=0; k<26; k++) {  //4n+1
+        for (int k=0; k<26; k++) {
      //assigns the char to the k place of encoder
     //rotation shifts alphabet n places
-		this->encoder[k] = (char) ('A' + (k + rotation) % 26);  //26
+		this->encoder[k] = (char) ('A' + (k + rotation) % 26);
     //assigns the char to the k place of decoder
     //equation reshifts the alphabet in opposite direction to map encoder
-		this->decoder[k] = (char) ('A' + (k - rotation +26) % 26); //26
+		this->decoder[k] = (char) ('A' + (k - rotation +26) % 26);
 		}
     }
 
@@ -256,17 +253,17 @@ class CaesarCipher: public SubstitutionCipher {
 class RandomCipher: public SubstitutionCipher{ 
     public: 
     //empty constructor for RandomCipher
-    RandomCipher(){   //1
+    RandomCipher(){
         //assigning the vector as a new instance of itself
-        this->key = key;    //1
-        for(int k =0; k < 26; k++){   //79
+        this->key = key; 
+        for(int k =0; k < 26; k++){
         //rotation is set at random number of 0-65
-        int rotation = rand()%65; //1
+        int rotation = rand()%65;
         //assigns the char to the k place of encoder
         //rotation shifts alphabet n places
-        this->encoder[k] = (char) ('A' + (k + rotation) % 26 ); //26
+        this->encoder[k] = (char) ('A' + (k + rotation) % 26 );
         //decoder stores alphabet
-        this->decoder[k] =  (char) (65 + k % 26); //26
+        this->decoder[k] =  (char) (65 + k % 26);
         }
     }
     
@@ -295,7 +292,7 @@ int main()
    cout << "Answer: " << reveal << endl;  
    RandomCipher cipher3 = RandomCipher();
    string three = cipher3.encrypt(message);
-   cout << three << endl; //1
+   cout << three << endl;
    three = cipher3.decrypt(three);
    cout << three << endl;
    return 0;
